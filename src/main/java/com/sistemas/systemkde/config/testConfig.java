@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.sistemas.systemkde.entities.Category;
 import com.sistemas.systemkde.entities.Order;
+import com.sistemas.systemkde.entities.OrderItem;
 import com.sistemas.systemkde.entities.Product;
 import com.sistemas.systemkde.entities.User;
 import com.sistemas.systemkde.entities.enums.OrderStatus;
 import com.sistemas.systemkde.repositories.CategoryRepository;
+import com.sistemas.systemkde.repositories.OrderItemRepository;
 import com.sistemas.systemkde.repositories.OrderRepository;
 import com.sistemas.systemkde.repositories.ProductRepository;
 import com.sistemas.systemkde.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class testConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 
 	//start application
@@ -76,6 +81,17 @@ public class testConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1,u2,u3,u4,u5));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice()); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice()); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice()); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		
+		
 	}
 
 }
